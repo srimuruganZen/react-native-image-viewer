@@ -72,6 +72,14 @@ export default class ImageViewer extends React.Component<Props, State> {
         }
       );
     }
+    if (nextProps.imageUrls.length !== this.props.imageUrls.length ){
+      this.loadedIndex = new Map<number, boolean>();
+      this.handleLongPressWithIndex = new Map<number, any>();
+      this.imageRefs = [];
+      this.setState({ ... new State() }, () => {
+        this.init(nextProps);
+      });
+    }
   }
 
   /**
@@ -472,7 +480,6 @@ export default class ImageViewer extends React.Component<Props, State> {
           onClick={this.handleClick}
           onDoubleClick={this.handleDoubleClick}
           enableSwipeDown={this.props.enableSwipeDown}
-          swipeDownThreshold={this.props.swipeDownThreshold}
           onSwipeDown={this.handleSwipeDown}
           pinchToZoom={this.props.enableImageZoom}
           enableDoubleClickZoom={this.props.enableImageZoom}
@@ -542,7 +549,6 @@ export default class ImageViewer extends React.Component<Props, State> {
               imageWidth={width}
               imageHeight={height}
               enableSwipeDown={this.props.enableSwipeDown}
-              swipeDownThreshold={this.props.swipeDownThreshold}
               onSwipeDown={this.handleSwipeDown}
               pinchToZoom={this.props.enableImageZoom}
               enableDoubleClickZoom={this.props.enableImageZoom}
